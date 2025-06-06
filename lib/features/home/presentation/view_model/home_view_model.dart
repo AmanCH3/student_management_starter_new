@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:student_management/app/service_locator/service_locator.dart';
 import 'package:student_management/features/auth/presentation/view/login_view.dart';
 import 'package:student_management/features/auth/presentation/view_model/login_view_model/login_view_model.dart';
 import 'package:student_management/features/home/presentation/view_model/home_state.dart';
@@ -18,10 +19,12 @@ class HomeViewModel extends Cubit<HomeState> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => BlocProvider(
-              create: (context) => LoginViewModel(),
-              child: LoginView(),
-            ),
+            // builder: (context) => BlocProvider(
+            //   create: (context) => LoginViewModel(),
+            //   child: LoginView(),
+            // ),
+            builder:  (context) => BlocProvider.value(value: serviceLocator<LoginViewModel>() ,
+            child: LoginView(),),
           ),
         );
       }
